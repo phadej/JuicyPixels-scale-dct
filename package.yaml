@@ -1,0 +1,35 @@
+name: JuicyPixels-scale-dct
+version: 0.1.0.0
+synopsis: Scale JuicyPixels images with DCT
+description: Scale JuicyPixels Images with DCT
+author: Oleg Grenrus <oleg.grenrus@iki.fi>
+maintainer: Oleg Grenrus <oleg.grenrus@iki.fi>
+license: BSD3
+github: phadej/JuicyPixels-scale-dct
+category: Web
+tested-with: GHC==7.8.4, GHC==7.10.2
+extra-source-files:
+- README.md
+
+ghc-options: -Wall
+
+dependencies:
+  - base        >=4.7      && <4.9
+  - JuicyPixels
+  - fft
+  - carray
+  - ix-shapable
+  - lens
+
+library:
+  source-dirs: src
+
+tests:
+  example:
+    main: Example.hs
+    source-dirs: example
+    dependencies:
+      - base
+      - JuicyPixels
+      - JuicyPixels-scale-dct
+      - JuicyPixels-util

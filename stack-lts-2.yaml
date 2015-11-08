@@ -1,0 +1,8 @@
+resolver: lts-2.22
+packages:
+- '.'
+extra-deps:
+- carray-0.1.6.1
+- fft-0.1.8.1
+- ix-shapable-0.1.0
+- JuicyPixels-util-0.2
