@@ -41,16 +41,6 @@ script:
 matrix:
   fast_finish: true
   include:
-  - env: GHCVER=7.6.3 CABALVER=1.18
-    addons:
-      apt:
-        sources:
-        - hvr-ghc
-        packages:
-        - cabal-install-1.18
-        - ghc-7.6.3
-        - libgmp-dev
-    compiler: ! ': # ghc-7.6.3 cabal-1.18'
   - env: GHCVER=7.8.4 CABALVER=1.18
     addons:
       apt:
@@ -60,6 +50,7 @@ matrix:
         - cabal-install-1.18
         - ghc-7.8.4
         - libgmp-dev
+        - libfftw3-dev
     compiler: ! ': # ghc-7.8.4 cabal-1.18'
   - env: GHCVER=7.8.4 CABALVER=1.18 STACKAGESNAPSHOT=lts-2.22
     addons:
@@ -70,6 +61,7 @@ matrix:
         - cabal-install-1.18
         - ghc-7.8.4
         - libgmp-dev
+        - libfftw3-dev
     compiler: ! ': # ghc-7.8.4 cabal-1.18 lts-2.22'
   - env: GHCVER=7.10.2 CABALVER=1.22
     addons:
@@ -80,6 +72,7 @@ matrix:
         - cabal-install-1.22
         - ghc-7.10.2
         - libgmp-dev
+        - libfftw3-dev
     compiler: ! ': # ghc-7.10.2 cabal-1.22'
   - env: GHCVER=7.10.2 CABALVER=1.22 STACKAGESNAPSHOT=lts-3.12
     addons:
@@ -90,6 +83,7 @@ matrix:
         - cabal-install-1.22
         - ghc-7.10.2
         - libgmp-dev
+        - libfftw3-dev
     compiler: ! ': # ghc-7.10.2 cabal-1.22 lts-3.12'
   - env: GHCVER=7.10.3 CABALVER=1.22
     addons:
@@ -100,6 +94,7 @@ matrix:
         - cabal-install-1.22
         - ghc-7.10.3
         - libgmp-dev
+        - libfftw3-dev
     compiler: ! ': # ghc-7.10.3 cabal-1.22'
   - env: GHCVER=head CABALVER=1.22
     addons:
@@ -110,6 +105,7 @@ matrix:
         - cabal-install-1.22
         - ghc-head
         - libgmp-dev
+        - libfftw3-dev
     compiler: ! ': # ghc-head cabal-1.22'
   allow_failures:
   - env: GHCVER=head CABALVER=1.22
