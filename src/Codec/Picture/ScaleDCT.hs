@@ -29,9 +29,9 @@ import Data.Coerce (Coercible, coerce)
 type Array2D = CArray (Int, Int) Double
 
 -- | Scale the image using DCT transform.
-scale :: (Int, Int)        -- ^ Width, height
+scale :: (Int, Int)        -- ^ Output width, height
       -> Image PixelRGBA8  -- ^ Input image
-      -> Image PixelRGBA8  --
+      -> Image PixelRGBA8  -- ^ Output image
 scale dim img = fromChannels r' g' b' a'
   where
     r = channelR img
