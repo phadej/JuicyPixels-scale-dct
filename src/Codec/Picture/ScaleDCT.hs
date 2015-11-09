@@ -1,4 +1,5 @@
 {-# LANGUAGE FlexibleContexts    #-}
+{-# LANGUAGE RankNTypes          #-}
 {-# LANGUAGE ScopedTypeVariables #-}
 -----------------------------------------------------------------------------
 -- |
@@ -11,14 +12,19 @@
 --
 module Codec.Picture.ScaleDCT (scale) where
 
-import Codec.Picture (Image (..), PixelRGBA8 (..), generateImage, imagePixels)
--- TODO: we don't really need dependency on 'lens'
-import Control.Lens.Fold (toListOf)
-import Data.Array.CArray (CArray, amap, array, bounds, elems, listArray, size,
-                          (!))
-import Data.Ix           (inRange, range)
-import Data.Word         (Word8)
-import Math.FFT          (dct2N, dct3N)
+import Prelude        ()
+import Prelude.Compat
+
+import Codec.Picture       (Image (..), PixelRGBA8 (..), Traversal,
+                            generateImage, imagePixels)
+import Control.Applicative (Const (..))
+import Data.Array.CArray   (CArray, amap, array, bounds, elems, listArray, size,
+                            (!))
+import Data.Ix             (inRange, range)
+import Data.Monoid         (Endo (..))
+import Data.Word           (Word8)
+import Math.FFT            (dct2N, dct3N)
+import Data.Coerce (Coercible, coerce)
 
 type Array2D = CArray (Int, Int) Double
 
@@ -91,4 +97,22 @@ limit x | x < 0     = 0
         | x > 255   = 255
         | otherwise = x
 
+-- From 'Control.Lens.Lens' from 'lens' package
+toListOf :: Traversal s s a a -> s -> [a]
+toListOf l = foldrOf l (:) []
+{-# INLINE toListOf #-}
 
+foldrOf :: Traversal s s a a -> (a -> r -> r) -> r -> s -> r
+foldrOf l f z = flip appEndo z . foldMapOf l (Endo #. f)
+{-# INLINE foldrOf #-}
+
+foldMapOf :: Monoid r => Traversal s s a a -> (a -> r) -> s -> r
+foldMapOf l f = getConst #. l (Const #. f)
+{-# INLINE foldMapOf #-}
+
+(#.) :: Coercible c b => (b -> c) -> (a -> b) -> a -> c
+(#.) _ = coerce (\x -> x :: b) :: forall a b. Coercible b a => a -> b
+{-# INLINE (#.) #-}
+
+--(.#) :: Coercible b a => (b -> c) -> (a -> b) -> a -> c
+--(.#) pbc _ = coerce pbc

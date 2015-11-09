@@ -30,11 +30,11 @@ library
   ghc-options: -Wall
   build-depends:
       base        >=4.7      && <4.9
+    , base-compat >=0.6.0
     , JuicyPixels
     , fft
     , carray
     , ix-shapable
-    , lens
   exposed-modules:
       Codec.Picture.ScaleDCT
   default-language: Haskell2010
@@ -47,13 +47,14 @@ test-suite example
   ghc-options: -Wall
   build-depends:
       base        >=4.7      && <4.9
+    , base-compat >=0.6.0
     , JuicyPixels
     , fft
     , carray
     , ix-shapable
-    , lens
     , base
     , JuicyPixels
     , JuicyPixels-scale-dct
     , JuicyPixels-util
+    , time
   default-language: Haskell2010

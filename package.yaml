@@ -15,11 +15,11 @@ ghc-options: -Wall
 
 dependencies:
   - base        >=4.7      && <4.9
+  - base-compat >=0.6.0
   - JuicyPixels
   - fft
   - carray
   - ix-shapable
-  - lens
 
 library:
   source-dirs: src
@@ -33,3 +33,4 @@ tests:
       - JuicyPixels
       - JuicyPixels-scale-dct
       - JuicyPixels-util
+      - time
