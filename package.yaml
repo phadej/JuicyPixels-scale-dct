@@ -1,5 +1,5 @@
 name: JuicyPixels-scale-dct
-version: 0.1.0.0
+version: 0.1.1.0
 synopsis: Scale JuicyPixels images with DCT
 description: Scale JuicyPixels Images with DCT
 author: Oleg Grenrus <oleg.grenrus@iki.fi>
@@ -10,12 +10,14 @@ category: Web
 tested-with: GHC==7.8.4, GHC==7.10.2
 extra-source-files:
 - README.md
+- CHANGELOG.md
+- phadej.png
 
 ghc-options: -Wall
 
 dependencies:
   - base        >=4.7      && <4.9
-  - base-compat >=0.6.0    && <0.7
+  - base-compat >=0.6.0    && <0.9
   - JuicyPixels >=3.2.5.3  && <3.3
   - fft         >=0.1.8.1  && <0.2
   - carray      >=0.1.6.1  && <0.2

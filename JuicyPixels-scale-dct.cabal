@@ -18,6 +18,7 @@ build-type:     Simple
 cabal-version:  >= 1.10
 
 extra-source-files:
+    phadej.png
     README.md
 
 source-repository head
