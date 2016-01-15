@@ -17,7 +17,7 @@ ghc-options: -Wall
 
 dependencies:
   - base        >=4.7      && <4.9
-  - base-compat >=0.6.0    && <0.9
+  - base-compat >=0.6.0    && <0.10
   - JuicyPixels >=3.2.5.3  && <3.3
   - fft         >=0.1.8.1  && <0.2
   - carray      >=0.1.6.1  && <0.2
