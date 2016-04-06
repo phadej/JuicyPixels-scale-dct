@@ -1,4 +1,4 @@
--- This file has been generated from package.yaml by hpack version 0.8.0.
+-- This file has been generated from package.yaml by hpack version 0.11.2.
 --
 -- see: https://github.com/sol/hpack
 
@@ -13,7 +13,7 @@ author:         Oleg Grenrus <oleg.grenrus@iki.fi>
 maintainer:     Oleg Grenrus <oleg.grenrus@iki.fi>
 license:        BSD3
 license-file:   LICENSE
-tested-with:    GHC==7.8.4, GHC==7.10.2
+tested-with:    GHC==7.8.4, GHC==7.10.3, GHC==8.0.1
 build-type:     Simple
 cabal-version:  >= 1.10
 
@@ -31,7 +31,7 @@ library
       src
   ghc-options: -Wall
   build-depends:
-      base        >=4.7      && <4.9
+      base        >=4.7      && <4.10
     , base-compat >=0.6.0    && <0.10
     , JuicyPixels >=3.2.5.3  && <3.3
     , fft         >=0.1.8.1  && <0.2
@@ -47,7 +47,7 @@ test-suite example
       example
   ghc-options: -Wall
   build-depends:
-      base        >=4.7      && <4.9
+      base        >=4.7      && <4.10
     , base-compat >=0.6.0    && <0.10
     , JuicyPixels >=3.2.5.3  && <3.3
     , fft         >=0.1.8.1  && <0.2
@@ -56,5 +56,5 @@ test-suite example
     , JuicyPixels
     , JuicyPixels-scale-dct
     , JuicyPixels-util      >=0.2   && <0.3
-    , time                  >=1.4.2 && <1.6
+    , time                  >=1.4.2 && <1.7
   default-language: Haskell2010
