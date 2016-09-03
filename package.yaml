@@ -1,7 +1,10 @@
 name: JuicyPixels-scale-dct
 version: 0.1.1.0
 synopsis: Scale JuicyPixels images with DCT
-description: Scale JuicyPixels Images with DCT
+description: |
+  Scale JuicyPixels Images with DCT
+  .
+  There is also a @friday@ version: <http://hackage.haskell.org/package/friday-scale-dct friday-scale-dct>
 author: Oleg Grenrus <oleg.grenrus@iki.fi>
 maintainer: Oleg Grenrus <oleg.grenrus@iki.fi>
 license: BSD3
