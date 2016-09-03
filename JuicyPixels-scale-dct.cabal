@@ -3,7 +3,7 @@
 -- see: https://github.com/sol/hpack
 
 name:           JuicyPixels-scale-dct
-version:        0.1.1.0
+version:        0.1.1.1
 synopsis:       Scale JuicyPixels images with DCT
 description:    Scale JuicyPixels Images with DCT
                 .
@@ -55,8 +55,7 @@ test-suite example
     , fft         >=0.1.8.1  && <0.2
     , carray      >=0.1.6.1  && <0.2
     , base
-    , JuicyPixels
+    , JuicyPixels           >=3.2.8
     , JuicyPixels-scale-dct
-    , JuicyPixels-util      >=0.2   && <0.3
     , time                  >=1.4.2 && <1.7
   default-language: Haskell2010

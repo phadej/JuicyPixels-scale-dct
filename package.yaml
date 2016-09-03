@@ -1,5 +1,5 @@
 name: JuicyPixels-scale-dct
-version: 0.1.1.0
+version: 0.1.1.1
 synopsis: Scale JuicyPixels images with DCT
 description: |
   Scale JuicyPixels Images with DCT
@@ -34,7 +34,6 @@ tests:
     source-dirs: example
     dependencies:
       - base
-      - JuicyPixels
+      - JuicyPixels           >=3.2.8
       - JuicyPixels-scale-dct
-      - JuicyPixels-util      >=0.2   && <0.3
       - time                  >=1.4.2 && <1.7

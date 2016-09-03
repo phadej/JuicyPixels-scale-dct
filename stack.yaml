@@ -1,6 +1,8 @@
 resolver: nightly-2016-09-03
 packages:
 - '.'
-extra-deps: []
+extra-deps:
+- JuicyPixels-3.2.8
+- JuicyPixels-scale-dct-0.1.1.1
 flags: {}
 extra-package-dbs: []
