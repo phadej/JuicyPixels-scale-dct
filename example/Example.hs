@@ -11,12 +11,15 @@ processImage
     -> IO ()
 processImage src size dst = do
     start <- getCurrentTime
-    Right dimg <- readImage src
-    let img = convertRGBA8 dimg
-    let ava = scale size img
-    writePng dst ava
-    end <- getCurrentTime
-    putStrLn $ dst ++ ": " ++ show (end `diffUTCTime` start)
+    eimg <- readImage src
+    case eimg of
+        Left err -> print err
+        Right dimg -> do
+            let img = convertRGBA8 dimg
+            let ava = scale size img
+            writePng dst ava
+            end <- getCurrentTime
+            putStrLn $ dst ++ ": " ++ show (end `diffUTCTime` start)
 
 main :: IO ()
 main = do
