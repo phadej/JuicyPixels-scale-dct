@@ -22,6 +22,10 @@ functionality.
 
 ![phadej](https://raw.githubusercontent.com/phadej/JuicyPixels-scale-dct/master/phadej-small.png)
 
+### very small
+
+![phadej](https://raw.githubusercontent.com/phadej/JuicyPixels-scale-dct/master/phadej-smaller.png)
+
 ### larger
 
 ![phadej](https://raw.githubusercontent.com/phadej/JuicyPixels-scale-dct/master/phadej-large.png)
