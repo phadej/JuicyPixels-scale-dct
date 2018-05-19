@@ -1,6 +1,5 @@
 name:           JuicyPixels-scale-dct
-version:        0.1.1.2
-x-revision:     3
+version:        0.1.2
 synopsis:       Scale JuicyPixels images with DCT
 description:    Scale JuicyPixels Images with DCT
                 .

@@ -10,7 +10,7 @@
 --
 -- Scale pictures using Discrete Cosine Transform.
 --
-module Codec.Picture.ScaleDCT (scale) where
+module Codec.Picture.ScaleDCT (scale, scaleWithKernel) where
 
 import Prelude ()
 import Prelude.Compat
@@ -24,7 +24,7 @@ import Data.Coerce         (Coercible, coerce)
 import Data.Ix             (inRange, range)
 import Data.Monoid         (Endo (..))
 import Data.Word           (Word8)
-import Math.FFT            (dct2N, dct3N)
+import Math.FFT            (dct1N, dct2N, dct3N)
 
 type Array2D = CArray (Int, Int) Double
 
@@ -33,7 +33,43 @@ scale
     :: (Int, Int)        -- ^ Output width, height
     -> Image PixelRGBA8  -- ^ Input image
     -> Image PixelRGBA8  -- ^ Output image
-scale dim img = fromChannels r' g' b' a'
+scale dim = scaleImpl (cut dim)
+
+-- | Scale the image using DCT transform.
+--
+-- Convolute /result/ image with a symmetric kernel.
+-- See <https://en.wikipedia.org/wiki/Symmetric_convolution>
+--
+-- Identity kernel:
+--
+-- @
+-- k 0 0 = 1
+-- k _ _ = 0
+-- @
+--
+-- Sharpen:
+--
+-- @
+-- k 0 0 = 1.75
+-- k 0 1 = -0.125
+-- k 1 0 = -0.125
+-- k 1 1 = -0.0625
+-- k _ _ = 0
+-- @
+--
+scaleWithKernel
+    :: (Int, Int)              -- ^ Output width, height
+    -> (Int -> Int -> Double)  -- ^ kernel
+    -> Image PixelRGBA8        -- ^ Input image
+    -> Image PixelRGBA8        -- ^ Output image
+scaleWithKernel dim@(w,h) kf = scaleImpl (cutWithKernel dim ker)
+  where
+    ker :: Array2D
+    ker = dct1N [0, 1] $ array kb [ (i, kf x y) | i@(y, x) <- range kb ]
+    kb = ((0, 0), (h-1, w-1))
+
+scaleImpl :: (Array2D -> Array2D) -> Image PixelRGBA8 -> Image PixelRGBA8
+scaleImpl cutImpl img = fromChannels r' g' b' a'
   where
     r = channelR img
     g = channelG img
@@ -42,7 +78,7 @@ scale dim img = fromChannels r' g' b' a'
 
     transform ch = amap (k*) ch'
       where
-        ch' = dct3N [1, 0] . cut dim . dct2N [0, 1] $ ch
+        ch' = dct3N [1, 0] . cutImpl . dct2N [0, 1] $ ch
         k = imgNorm ch / imgNorm ch'
 
     r' = transform r
@@ -63,6 +99,18 @@ cut (w, h) img = array b [ (i, pick i) | i <- range b ]
     b'     = bounds img
     pick i | inRange b' i = img ! i
            | otherwise    = 0
+
+cutWithKernel :: (Int, Int) -> Array2D -> Array2D -> Array2D
+cutWithKernel (w, h) k img = array b [ (i, pick i) | i <- range b ]
+  where
+    b      = ((0,0), (h-1, w-1))
+    b'     = bounds img
+    pick i | inRange b' i = k' i * (img ! i)
+           | otherwise    = 0
+
+    kb = bounds k
+    k' i | inRange kb i = k ! i
+         | otherwise    = 0
 
 pixelR, pixelG, pixelB, pixelA :: PixelRGBA8 -> Word8
 pixelR (PixelRGBA8 r _ _ _) = r
