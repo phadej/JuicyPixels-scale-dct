@@ -1,1 +1,4 @@
 packages: .
+
+-- carray is not on GitHub, I'm too lazy to send an email.
+allow-newer: carray:bytestring
