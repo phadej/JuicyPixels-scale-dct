@@ -12,9 +12,6 @@
 --
 module Codec.Picture.ScaleDCT (scale, scaleWithKernel) where
 
-import Prelude ()
-import Prelude.Compat
-
 import Codec.Picture
        (Image (..), PixelRGBA8 (..), Traversal, generateImage, imagePixels)
 import Control.Applicative (Const (..))
